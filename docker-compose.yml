@@ -1,0 +1,33 @@
+version: "3"
+services:
+  web:
+    container_name: web-app
+    build: 
+      context: ./
+      dockerfile: ./client/Dockerfile
+    ports: 
+      - 3000:3000
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  server:
+    container_name: server-app
+    build: 
+      context: ./
+      dockerfile: ./server/Dockerfile
+    ports:
+      - 3001:3001
+    volumes:
+      - .:/server
+      - /server/node_modules
+
+  # db:
+  #   container_name: db-app
+  #   image: mariadb:10.8.2
+  #   restart: always
+  #   ports:
+  #     - 3306:3306
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: db_owl_house
